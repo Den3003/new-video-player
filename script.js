@@ -4,7 +4,6 @@ let video = document.querySelector('#video');
 //  * Buttons
 
 let playPauseBtn = document.querySelector('#playPauseBtn');
-let stopBtn = document.querySelector('#stopBtn');
 let muteBtn = document.querySelector('#muteBtn');
 let minusBtn = document.querySelector('#minusBtn');
 let plusBtn = document.querySelector('#plusBtn');
@@ -17,7 +16,7 @@ let progressBar = document.querySelector('#progress-bar')
 
 const startStopVideo = () => {
     let videoState = playPauseBtn.getAttribute('data-video-state');
-// console.log(videoState);
+
     if (videoState === 'pause') {
         video.play();
         playPauseBtn.setAttribute('data-video-state', 'play');
@@ -49,6 +48,46 @@ progress.addEventListener('click', function (event) {
     
 
 });
+
+minusBtn.addEventListener('click', () => {
+    let currentVolume = Math.floor(video.volume * 10) / 10;
+    if (currentVolume > 0) 
+    {
+        video.volume -= 0.1;
+    }
+    if (currentVolume <= 0)
+    {
+        video.muted = true;
+    }
+    else
+    {
+        video.muted = false;
+    }
+});
+
+plusBtn.addEventListener('click', () => {
+    let currentVolume = Math.floor(video.volume * 10) / 10;
+
+    if (video.muted) 
+    {
+        video.muted = false;
+    }
+    if (currentVolume < 1) 
+    {
+        video.volume += 0.1;
+    }
+});
+
+muteBtn.addEventListener('click', () => {
+    if(video.muted)
+    {
+        video.muted = false;
+    }
+    else 
+    {
+        video.muted = true;
+    }
+})
 
 
 
